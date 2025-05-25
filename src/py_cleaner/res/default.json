@@ -1,0 +1,10 @@
+{
+  "clear_dirs": [
+    "${appdata}\\py-cleaner\\Test3",
+    "${appdata}\\py-cleaner\\Test4"
+  ],
+  "delete_dirs": [
+    "${appdata}\\py-cleaner\\Test",
+    "${appdata}\\py-cleaner\\Test2"
+  ]
+}

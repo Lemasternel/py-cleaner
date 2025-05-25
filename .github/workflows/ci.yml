@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configuring Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.3'
+
+      - name: Installing dependencies
+        run: |
+          pip install poetry==2.1.3
+
+      - name: Configuring Poetry
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry config virtualenvs.create true
+          poetry install --with dev
+
+      - name: Validating code patterns
+        run: |
+          poetry run pylint ./**/*.py
+
+      - name: Running tests
+        run: |
+          poetry run pytest .
